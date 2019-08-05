@@ -4,7 +4,10 @@ const chalk = require('chalk');
 
 const notes = getNotes()
 
-console.log(chalk.green.bold.inverse(notes));
-console.log(chalk.blue('Hello') + ' World' + chalk.red('!'));
+const command = process.argv[2]
 
-console.log(validator.isEmail('anthony@example.com'))
+if (command === 'add'){
+    console.log('Adding note!')
+} else if (command === 'remove') {
+    console.log('Removing note!')
+}
