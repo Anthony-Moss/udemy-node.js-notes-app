@@ -1,6 +1,7 @@
 const validator = require('validator');
 const chalk = require('chalk');
 const yargs = require('yargs');
+const notes = require('./notes.js');
 
 // Customize yargs
 yargs.version('1.1.0')
@@ -24,8 +25,9 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log('Title: ' + argv.title
-                    + 'Body: ' + argv.body)
+        notes.addNote(argv.title, argv.body);
+        // console.log('Title: ' + argv.title
+        //             + 'Body: ' + argv.body)
     }
 })
 
@@ -33,8 +35,18 @@ yargs.command({
 yargs.command({
     command: 'remove',
     describe: 'Remove a note',
-    handler: function () {
+    builder: {
+        title: {
+            describe: 'Note title',
+            // must provide this arg now or it wont run
+            demandOption: true,
+            // title must be a string or it wont run
+            type: 'string'
+        }
+    },
+    handler: function (argv) {
         console.log('Removing the note!')
+        notes.removeNote(argv.title)
     }
 })
 
@@ -56,7 +68,7 @@ yargs.command({
     }
 })
 
-// does kinda same thing as yargs.parse()
-console.log(yargs.argv)
+// does kinda same thing as yargs.parse() but shows on console
+// console.log(yargs.argv)
 
 yargs.parse()
