@@ -37,10 +37,19 @@ const removeNote = (title) => {
     if (notes.length > notesToKeep.length) {
         console.log(chalk.green.inverse(`Note ${title} removed!`))
         saveNotes(notesToKeep)
-    } else{
+    } else {
         console.log(chalk.red.inverse(`No note with ${title} found!`))
     }
-} 
+}
+
+const listNotes = () => {
+    const notes = loadNotes()
+    const noteTitles = []
+        notes.forEach(element => {
+            noteTitles.push(element.title)
+        });
+        return noteTitles
+}
 
 const loadNotes = () => {
     try {
@@ -56,5 +65,5 @@ module.exports = {
     getNotes,
     addNote,
     removeNote,
-    loadNotes
+    listNotes
 }

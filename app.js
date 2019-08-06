@@ -45,7 +45,7 @@ yargs.command({
         }
     },
     handler(argv) {
-        const saved = notes.removeNote(argv.title)
+        notes.removeNote(argv.title)
 
         // alt way to do the console logging in app.js not notes.js
         // if (saved) {
@@ -70,8 +70,8 @@ yargs.command({
     command: 'list',
     describe: 'List the notes',
     handler() {
-        console.log('Listing all the notes')
-        console.log(notes.loadNotes())
+        console.log(chalk.inverse.blue('Your notes'))
+        console.log(notes.listNotes())
     }
 })
 
