@@ -30,21 +30,15 @@ const saveNotes = function (notes) {
 
 const removeNote = function (title) {
     let notes = loadNotes();
-    try {
-        const noteExist = notes.filter(function (note) {
-            return note.title === title
-        })
-        if (noteExist.length === 1) {
-            const notesToKeep = notes.filter((note) => {
-                return note.title !== title
-            })
-            saveNotes(notesToKeep)
-            return title
-        } else {
-            return null
-        }
-    } catch (e) {
-        return null
+    const notesToKeep = notes.filter((note) => {
+        return note.title !== title
+    })
+
+    if (notes.length > notesToKeep.length) {
+        console.log(chalk.green.inverse(`Note ${title} removed!`))
+        saveNotes(notesToKeep)
+    } else{
+        console.log(chalk.red.inverse(`No note with ${title} found!`))
     }
 } 
 
