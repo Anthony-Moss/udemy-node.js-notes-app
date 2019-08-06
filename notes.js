@@ -45,9 +45,6 @@ const removeNote = function (title) {
     } catch (e) {
         return null
     }
-    // } else {
-    //     console.log(chalk.inverse.red('There is no note with that name!'))
-    // }
 } 
 
 const loadNotes = function () {
