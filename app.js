@@ -24,7 +24,7 @@ yargs.command({
             type: "string"
         }
     },
-    handler: function (argv) {
+    handler(argv) {
         notes.addNote(argv.title, argv.body);
         // console.log('Title: ' + argv.title
         //             + 'Body: ' + argv.body)
@@ -44,7 +44,7 @@ yargs.command({
             type: 'string'
         }
     },
-    handler: function (argv) {
+    handler(argv) {
         const saved = notes.removeNote(argv.title)
 
         // alt way to do the console logging in app.js not notes.js
@@ -60,7 +60,7 @@ yargs.command({
 yargs.command({
     command: 'read',
     describe: 'Read a note',
-    handler: function () {
+    handler() {
         console.log('Reading a note!')
     }
 })
@@ -69,12 +69,13 @@ yargs.command({
 yargs.command({
     command: 'list',
     describe: 'List the notes',
-    handler: function () {
+    handler() {
         console.log('Listing all the notes')
+        console.log(notes.loadNotes())
     }
 })
 
+yargs.parse()
+
 // does kinda same thing as yargs.parse() but shows on console
 // console.log(yargs.argv)
-
-yargs.parse()
