@@ -17,8 +17,9 @@ const addNote = function (title, body) {
             body: body
         })
         saveNotes(notes)
+        console.log(chalk.inverse.green(`Note created with title: ${title}!`))
     } else {
-        console.log('Note title already taken')
+        console.log(chalk.inverse.red(`${title} is taken, please use a different title.`))
     }
 }
 
