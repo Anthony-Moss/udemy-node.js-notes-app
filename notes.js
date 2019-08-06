@@ -1,4 +1,5 @@
 const fs = require('fs');
+const chalk = require('chalk');
 
 const getNotes = function () {
     return 'Your notes are...'
@@ -28,18 +29,25 @@ const saveNotes = function (notes) {
 
 const removeNote = function (title) {
     let notes = loadNotes();
-    const noteExist = notes.filter(function (note) {
-        return note.title === title
-    })
-    if (noteExist.length === 1) {
-        const noteToDelete = notes.filter((note) => {
-            return note.title !== title
+    try {
+        const noteExist = notes.filter(function (note) {
+            return note.title === title
         })
-        notes = noteToDelete
-        saveNotes(notes)
-    } else {
-        console.log('There is no note with that name!')
+        if (noteExist.length === 1) {
+            const notesToKeep = notes.filter((note) => {
+                return note.title !== title
+            })
+            saveNotes(notesToKeep)
+            return title
+        } else {
+            return null
+        }
+    } catch (e) {
+        return null
     }
+    // } else {
+    //     console.log(chalk.inverse.red('There is no note with that name!'))
+    // }
 } 
 
 const loadNotes = function () {

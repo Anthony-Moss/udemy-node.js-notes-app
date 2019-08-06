@@ -45,8 +45,12 @@ yargs.command({
         }
     },
     handler: function (argv) {
-        console.log('Removing the note!')
-        notes.removeNote(argv.title)
+        const saved = notes.removeNote(argv.title)
+        if (saved) {
+            console.log(chalk.inverse.green(`Removing the note titled: ${argv.title}!`))
+        } else {
+            console.log(chalk.inverse.red(`Couldnt find note with ${argv.title} title`))
+        }
     }
 })
 
